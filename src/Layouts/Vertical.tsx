@@ -1,9 +1,12 @@
-import React, { Suspense, useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { ThemeSettings, useThemeContext } from '@/context'
 import { useViewport } from '@/hooks'
-
 import { changeHTMLAttribute } from '@/utils/layout'
+import Preloader from '@/components/Preloader'
+import Topbar from './TopBar'
+import LeftSidebar from './LeftSideBar'
+import Footer from './Footer'
 
 interface VerticalLayoutProps {
 	children?: any
@@ -29,10 +32,12 @@ const VerticalLayout = ({ children }: VerticalLayoutProps) => {
 	}, [settings.topbar.theme])
 
 	useEffect(() => {
+
 		changeHTMLAttribute('data-menu-color', settings.sidebar.theme)
 	}, [settings.sidebar.theme])
 
 	useEffect(() => {
+		console.log(settings)
 		changeHTMLAttribute('data-sidenav-size', settings.sidebar.size)
 	}, [settings.sidebar.size])
 
@@ -59,7 +64,7 @@ const VerticalLayout = ({ children }: VerticalLayoutProps) => {
 	return (
 		<Suspense fallback={<div />}>
 			<div className="wrapper">
-				{/* <Suspense fallback={<div />}>
+				<Suspense fallback={<div />}>
 					<Topbar
 					// openLeftMenuCallBack={openMenu} topbarDark={topbarDark}
 					/>
@@ -83,10 +88,6 @@ const VerticalLayout = ({ children }: VerticalLayoutProps) => {
 						<Footer />
 					</Suspense>
 				</div>
-
-				<Suspense fallback={<div />}>
-					<RightSidebar />
-				</Suspense> */}
 			</div>
 		</Suspense>
 	)

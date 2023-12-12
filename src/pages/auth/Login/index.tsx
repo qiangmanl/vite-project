@@ -1,6 +1,21 @@
 import { Button, Col, Row } from 'react-bootstrap'
 import { Link, Navigate } from 'react-router-dom'
+
 import useLogin from './useLogin'
+import PageBreadcrumb from '@/components/PageBreadcrumb'
+import VerticalForm from '@/components/VerticalForm'
+import FormInput from '@/components/FormInput' 
+
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import AuthLayout from '@/Layouts/AuthLayout'
+
+interface UserData {
+	email: string
+	password: string
+}
+
+
 
 const BottomLinks = () => {
 	return (
@@ -20,27 +35,74 @@ const BottomLinks = () => {
 	)
 }
 
+const schemaResolver = yupResolver(
+	yup.object().shape({
+		email: yup.string().required('Please enter Username'),
+		password: yup.string().required('Please enter Password'),
+	})
+)
+
+
+
 
 const Login = () => {
 	const { loading, login, redirectUrl, isAuthenticated } = useLogin()
 
 	return (
         <>
+			<PageBreadcrumb title="Log In" />
 
             {isAuthenticated && <Navigate to={redirectUrl} replace />}
 
-            
-            <div className="mb-0 text-start">
-						<Button
-							variant="soft-primary"
-							className="w-100"
-							type="submit"
-							disabled={loading}
-						>
-							<i className="ri-login-circle-fill me-1" />{' '}
-							<span className="fw-bold">Log In</span>{' '}
-						</Button>
+			<AuthLayout
+				authTitle="Sign In"
+				helpText="Enter your email address and password to access account."
+				bottomLinks={<BottomLinks />}
+				hasThirdPartyLogin={false}
+			>
+					
+				<VerticalForm<UserData>
+						onSubmit={login}
+						resolver={schemaResolver}
+						defaultValues={{ email: 'velonic@techzaa.com', password: 'Velonic' }}
+						
+				>
+					<FormInput
+						label="Email address"
+						type="text"
+						name="email"
+						placeholder="Enter your email"
+						containerClass="mb-3"
+						required
+					/>
+					<FormInput
+						label="Password"
+						name="password"
+						type="password"
+						required
+						id="password"
+						placeholder="Enter your password"
+						containerClass="mb-3"
+					>
+						<Link to="/auth/forgot-password" className="text-muted float-end">
+							<small>Forgot your password?</small>
+						</Link>
+					</FormInput>
+					<div className="mb-0 text-start">
+							<Button
+								variant="soft-primary"
+								className="w-100"
+								type="submit"
+								disabled={loading}
+							>
+								<i className="ri-login-circle-fill me-1" />{' '}
+								<span className="fw-bold">Log In</span>{' '}
+							</Button>
 					</div>
+
+				</VerticalForm>
+
+			</AuthLayout>
         </>
     )
 

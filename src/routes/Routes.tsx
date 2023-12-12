@@ -18,6 +18,7 @@ export interface RoutesProps {
 	children?: RoutesProps[]
 }
 
+// 只要是认证路由都要加 PrivateRoute
 const dashboardRoutes: RoutesProps = {
 	path: '/admin',
 	name: 'Dashboards',
@@ -40,9 +41,7 @@ const dashboardRoutes: RoutesProps = {
 }
 
 
-const Login = React.lazy(() => import('../pages/auth/Login'))
-
-
+const Login = React.lazy(() => import('@/pages/auth/Login'))
 const authRoutes: RoutesProps[] = [
 	{
 		path: '/auth/login',
@@ -72,7 +71,9 @@ const flattenRoutes = (routes: RoutesProps[]) => {
 
 const authProtectedRoutes = [dashboardRoutes]
 const publicRoutes = [...authRoutes]
+// login after
 const authProtectedFlattenRoutes = flattenRoutes([...authProtectedRoutes])
+// public routes
 const publicProtectedFlattenRoutes = flattenRoutes([...publicRoutes])
 export {
 	authProtectedFlattenRoutes,

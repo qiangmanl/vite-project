@@ -1,6 +1,6 @@
-import { Col, Row } from 'react-bootstrap'
+// import { Col, Row } from 'react-bootstrap'
 
-import { PageBreadcrumb } from '@/components'
+import PageBreadcrumb from '@/components/PageBreadcrumb'
 
 
 const Dashboard = () => {

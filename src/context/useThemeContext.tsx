@@ -1,37 +1,3 @@
-// Usage
-// const handleButtonClick = () => {
-//     // 更新 settings，可以传递一个包含新设置的对象
-//     updateSettings({
-//       layout: {
-//         type: 'horizontal',
-//         mode: 'boxed',
-//         menuPosition: 'fixed',
-//       },
-//       theme: 'dark',
-//       topbar: {
-//         theme: 'dark',
-//         logo: '',
-//       },
-//       sidebar: {
-//         theme: 'dark',
-//         size: 'full',
-//         user: true,
-//       },
-//       rightSidebar: true,
-//     });
-//   };
-// }
-
-
-// const handleLayoutButtonClick = () => {
-// 	// 更新 layout，可以传递一个包含新设置的对象
-// 	updateLayout({
-// 		type: 'horizontal',
-// 		mode: 'boxed',
-// 		menuPosition: 'fixed',
-// 	});
-// 	};
-
 import {
 	ReactNode,
 	createContext,

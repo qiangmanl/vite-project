@@ -1,4 +1,4 @@
-import { PageBreadcrumb } from '@/components'
+import  PageBreadcrumb  from '@/components/PageBreadcrumb'
 
 const Error404 = () => {
 	return (
